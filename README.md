@@ -1,4 +1,4 @@
-# NFT bidding or Buying platform
+# NFT Bidding and Buying platform
 
 ## Introduction:-
 - This is a kind of market place where we can directly buy the NFT's or could gamble the NFT's of the client based on the game we play like rock ,paper, scissors or cup game. 
