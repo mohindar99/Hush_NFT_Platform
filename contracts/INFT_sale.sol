@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
   * importing IERC721 as we use ERC721 in the main contract of bidding
 */
 
-contract INFT_sale {
+interface Ibidding {
     /*
     * Emmitted when the owner of the NFT is listed and changed.
     */
@@ -16,9 +16,7 @@ contract INFT_sale {
     /*
     * Returns a unique keccak value by taking nft address and tokenid from the user for listing the NFT
     */
-    function getKeccak(address _nft , uint _tokenId) public virtual pure returns(bytes32){
-       
-    }
+    function getKeccak(address _nft , uint _tokenId) external pure returns(bytes32) ;
     /*
     * Require a unique tokenID instead of repeated
     * Token is registered in the contract for further usage
@@ -26,9 +24,8 @@ contract INFT_sale {
     * NFT cannot a sold one
     */
 
-    function nft_list (address _nft, uint _price, uint _tokenId) external virtual {
+    function nft_list (address _nft, uint _price, uint _tokenId) external  ;
       
-    }
     /*
     * Winner address cannot be zero address
     * Total contribution of the nft should be greter than nft price
@@ -36,9 +33,8 @@ contract INFT_sale {
     *  Emits a {nft_logs} event.
     */
 
-    function claim_reward(address winnerAddress, address _nft, uint _tokenId) external virtual {
-      
-    }
+    function claim_reward(address winnerAddress, address _nft, uint _tokenId) external ;
+    
     /*
     * NFT address cannot be a zero address
     * NFT cannot a sold one
@@ -47,9 +43,9 @@ contract INFT_sale {
     * Buying the NFT directly with the mentioned price which can be done when the token 'owner' approves the contract
     *  Emits a {nft_logs} event.
     */
-    function buy(address _nft, uint _tokenId) external payable virtual {
+    function buy(address _nft, uint _tokenId) external payable  ;
         
-    }
+    
     /*
     * NFT address cannot be a zero address
     * NFT cannot a sold one
@@ -57,14 +53,13 @@ contract INFT_sale {
     * Staring the game by sending 51% of the amount of the NFT
     *  Emits a {nft_logs} event.
     */
-    function start(address _nft, uint _tokenId) payable external virtual {
+    function start(address _nft, uint _tokenId) payable external;  
    
-    }
+    
     /*
     * Only admin should withdraw the funds
     * Admin can withdraw the funds from the contract which is 2% in each bidding transaction
     */
-    function admin_withdraw() external virtual {
+    function admin_withdraw() external  ;
 
-    }
 }
