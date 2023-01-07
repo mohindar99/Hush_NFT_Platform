@@ -11,7 +11,7 @@ contract NFT_sale is INFT_sale{
 
     //Mapping from bytes32 to nft details
     mapping(bytes32 => NFT) public nft;
-     
+
     //restricted to admin 
     modifier onlyAdmin {
       require(msg.sender == admin);
@@ -27,7 +27,7 @@ contract NFT_sale is INFT_sale{
     constructor()  {
         admin = payable (msg.sender);
     }
-
+    
     struct NFT{
         address nft;
         uint tokenId;
@@ -40,6 +40,11 @@ contract NFT_sale is INFT_sale{
     function getKeccak(address _nft , uint _tokenId) public virtual override pure returns(bytes32){
         return keccak256(abi.encodePacked(_nft, _tokenId));
     }
+    function owner(address _nft , uint _tokenId) public view returns(address){
+     bytes32 key = keccak256(abi.encodePacked(_nft, _tokenId));
+     return nft[key].owner;
+    }
+
     // Listing the nft to smart contract
     function nft_list (address _nft, uint _price, uint _tokenId) external virtual override nftsExist(_nft,_tokenId){
         bytes32 key = keccak256(abi.encodePacked(_nft, _tokenId));
@@ -62,7 +67,8 @@ contract NFT_sale is INFT_sale{
 
         ERC721 nftContract = ERC721(nft[key].nft);
         nftContract.transferFrom(nft[key].owner,winnerAddress, _tokenId);
-
+        
+        nft[key].owner=winnerAddress;
         emit nft_logs(_nft,_tokenId,winnerAddress,nft[key].price);
     }
     // Buying the nft from the contract
